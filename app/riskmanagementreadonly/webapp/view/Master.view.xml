@@ -1,0 +1,29 @@
+<mvc:View controllerName="list.of.risks.riskmanagementreadonly.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <Table id="idListOfRisksTable" items="{oDataServ>/ListOfRisks}">
+            <headerToolbar>
+                <OverflowToolbar id="idListOfRisksTableToolbar" >
+                    <Title text="{i18n>title}" />
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column
+                    id="idTitleColumn">
+                    <Text id="idTitleColumnText" text="{i18n>titleColumn}" />
+                </Column>
+                <Column
+                    id="idDescriptionColumn">
+                    <Text id="idDescriptionColumnText" text="{i18n>descriptionColumn}" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem >
+                    <Text text="{oDataServ>title}" />
+                    <Text text="{oDataServ>descr}" />
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+</mvc:View>

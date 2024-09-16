@@ -1,22 +1,21 @@
-
 namespace riskmanagement;
 
 using {
         managed,
         cuid,
-        User,
         sap.common.CodeList
 } from '@sap/cds/common';
 
 entity Risks : cuid, managed {
-        title                    : String(100);
-        owner                    : String;
-        prio                     : Association to Priority;
-        descr                    : String;
-        miti                     : Association to Mitigations;
-        impact                   : Integer;
+        title                   : String(100);
+        owner                   : String;
+        prio                    : Association to Priority;
+        descr                   : String;
+        miti                    : Association to Mitigations;
+        impact                  : Integer;
+        changeLog               : Composition of many ChangeLog;
         // bp : Association to BusinessPartners;
-        virtual criticality      : Integer;
+        virtual criticality     : Integer;
         virtual PrioCriticality : Integer;
 }
 
@@ -35,3 +34,17 @@ entity Priority : CodeList {
                     low    = 'L';
             };
 }
+
+entity ChangeLog : cuid, managed {
+        property  : String;
+        prevValue : String;
+        newValue  : String;
+}
+
+@readonly
+entity ListOfRisks as
+        select from riskmanagement.Risks as risks {
+                risks.ID,
+                risks.title,
+                risks.descr,
+        }
