@@ -13,7 +13,8 @@ entity Risks : cuid, managed {
         descr                   : String;
         miti                    : Association to Mitigations;
         impact                  : Integer;
-        changeLog               : Composition of many ChangeLog;
+        changeLog               : Composition of many ChangeLog
+                                        on changeLog.risk = $self;
         // bp : Association to BusinessPartners;
         virtual criticality     : Integer;
         virtual PrioCriticality : Integer;
@@ -39,6 +40,7 @@ entity ChangeLog : cuid, managed {
         property  : String;
         prevValue : String;
         newValue  : String;
+        risk      : Association to Risks;
 }
 
 @readonly

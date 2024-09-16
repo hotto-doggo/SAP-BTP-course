@@ -228,3 +228,15 @@ annotate service.ChangeLog with @(
     ]
 );
 
+annotate service.ChangeLog with {
+    property @Common.FieldControl : #ReadOnly
+};
+
+annotate service.ChangeLog with {
+    prevValue @Common.FieldControl : #ReadOnly
+};
+
+annotate service.ChangeLog with {
+    newValue @Common.FieldControl : #ReadOnly
+};
+

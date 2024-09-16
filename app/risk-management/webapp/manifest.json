@@ -128,7 +128,20 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Risks"
+              "contextPath": "/Risks",
+              "controlConfiguration": {
+                "changeLog/@com.sap.vocabularies.UI.v1.LineItem#i18nChangeLog": {
+                  "tableSettings": {
+                    "selectionLimit": 0,
+                    "selectionMode": "None",
+                    "creationMode": {
+                      "createAtEnd": false,
+                      "inlineCreationRowsHiddenInEditMode": false
+                    },
+                    "selectAll": false
+                  }
+                }
+              }
             }
           }
         }
