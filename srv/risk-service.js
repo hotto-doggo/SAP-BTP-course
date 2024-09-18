@@ -1,12 +1,14 @@
 
 // Import the cds facade object (https://cap.cloud.sap/docs/node.js/cds-facade)
-const cds = require('@sap/cds')
+const cds = require('@sap/cds');
+const { response } = require('express');
+const { StatusCodes } = require("http-status-codes");
 
 // The service implementation with all service handlers
-module.exports = cds.service.impl(async function() {
+module.exports = cds.service.impl(async function () {
 
     // Define constants for the Risk and BusinessPartner entities from the risk-service.cds file
-    const { Risks, BusinessPartners } = this.entities;
+    const { Risks, BusinessPartners, Items } = this.entities;
 
     // This handler will be executed directly AFTER a READ operation on RISKS
     // With this we can loop through the received data set and manipulate the single risk entries
@@ -16,7 +18,7 @@ module.exports = cds.service.impl(async function() {
 
         // Looping through the array of risks to set the virtual field 'criticality' that you defined in the schema
         risks.forEach((risk) => {
-            if( risk.impact >= 100000) {
+            if (risk.impact >= 100000) {
                 risk.criticality = 1;
             } else {
                 risk.criticality = 2;
@@ -41,6 +43,20 @@ module.exports = cds.service.impl(async function() {
     })
 
     this.on("getItemsByQuantity", (req) => {
-        debugger;
+        const items = SELECT.from(Items).where({ quantity: req.data.quantity });
+        return items;
     })
-  });
+
+    this.before("createItem", req => {
+        if (req.data.quantity > 100) {
+            req.reject({
+                code: StatusCodes.BAD_REQUEST,
+                message: "quantity should not be greater than 100"
+            })
+        }
+    })
+
+    this.on("createItem", req => {
+        return INSERT(req.data).into(Items);
+    })
+});

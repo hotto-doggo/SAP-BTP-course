@@ -49,7 +49,7 @@ entity ListOfRisks as
                 risks.ID,
                 risks.title,
                 risks.descr,
-        }
+        };
 
 // new wntity for learning purpose, not included into main lessons
 
