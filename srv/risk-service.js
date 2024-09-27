@@ -106,6 +106,8 @@ module.exports = cds.service.impl(async function () {
         // We don't want them in our application
         req.query.where("LastName <> '' and FirstName <> '' ");
 
+        req.query.SELECT.count = false;
+
         return await BPsrv.transaction(req).send({
             query: req.query,
             headers: {

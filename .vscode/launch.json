@@ -5,15 +5,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "cds watch --in-memory?",
-      "name": "cds watch local",
-      "request": "launch",
-      "type": "node-terminal",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
-    },
-    {
       "command": "cds watch --with-mocks --in-memory?",
       "name": "cds watch",
       "request": "launch",
@@ -23,7 +14,7 @@
       ]
     },
     {
-      "command": "cds watch --profile development --with-mocks --in-memory?",
+      "command": "cds watch --in-memory?",
       "name": "cds watch dev",
       "request": "launch",
       "type": "node-terminal",
