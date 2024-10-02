@@ -14,7 +14,7 @@
       ]
     },
     {
-      "command": "cds watch --in-memory?",
+      "command": "cds watch --profile development --in-memory?",
       "name": "cds watch dev",
       "request": "launch",
       "type": "node-terminal",

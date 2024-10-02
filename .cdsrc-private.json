@@ -1,0 +1,43 @@
+{
+  "requires": {
+    "[hybrid]": {
+      "auth": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
+          "org": "2bf47144trial",
+          "space": "dev",
+          "instance": "riskmanagement-xsuaa",
+          "key": "riskmanagement-xsuaa-key",
+          "resolved": false
+        },
+        "kind": "xsuaa",
+        "vcap": {
+          "name": "auth"
+        }
+      },
+      "destinations": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
+          "org": "2bf47144trial",
+          "space": "dev",
+          "instance": "riskmanagement-destination",
+          "key": "riskmanagement-destination-key",
+          "resolved": false
+        },
+        "kind": "destinations",
+        "vcap": {
+          "name": "destinations"
+        }
+      },
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata-v2",
+        "model": "srv\\external\\API_BUSINESS_PARTNER",
+        "credentials": {
+          "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+        }
+      }
+    }
+  }
+}
