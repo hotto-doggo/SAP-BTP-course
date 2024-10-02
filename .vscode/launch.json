@@ -5,6 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "command": "cds watch --profile hybrid",
+      "name": "cds watch hybrid",
+      "request": "launch",
+      "type": "node-terminal",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
       "command": "cds watch --with-mocks --in-memory?",
       "name": "cds watch",
       "request": "launch",
