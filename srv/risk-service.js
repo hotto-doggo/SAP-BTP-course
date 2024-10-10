@@ -134,4 +134,13 @@ module.exports = cds.service.impl(async function () {
     this.on("createItem", req => {
         return INSERT(req.data).into(Items);
     })
+
+
+    // my node js destination
+
+    const localDest = await cds.connect.to("LOCAL_DESTINATION");
+
+    this.on("getDestinationFromCC", req => {
+        return localDest.get("/");
+    })
 });

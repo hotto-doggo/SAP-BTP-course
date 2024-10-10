@@ -11,9 +11,31 @@
           "key": "riskmanagement-xsuaa-key",
           "resolved": false
         },
-        "kind": "xsuaa",
+        "kind": "mocked",
         "vcap": {
           "name": "auth"
+        },
+        "users": {
+          "risk.viewer@tester.sap.com": {
+            "password": "initial",
+            "ID": "riskviewer",
+            "userAttributes": {
+              "email": "risk.viewer@tester.sap.com"
+            },
+            "roles": [
+              "RiskViewer"
+            ]
+          },
+          "risk.manager@tester.sap.com": {
+            "password": "initial",
+            "ID": "riskmanager",
+            "userAttributes": {
+              "email": "risk.manager@tester.sap.com"
+            },
+            "roles": [
+              "RiskManager"
+            ]
+          }
         }
       },
       "destinations": {
@@ -36,6 +58,13 @@
         "model": "srv\\external\\API_BUSINESS_PARTNER",
         "credentials": {
           "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+        }
+      },
+      "LOCAL_DESTINATION": {
+        "kind": "odata",
+        "credentials": {
+          "path": "/",
+          "destination": "localDestination"
         }
       }
     }

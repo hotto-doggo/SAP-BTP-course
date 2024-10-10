@@ -30,4 +30,7 @@ mta_archives/
 # .vscode
 # .idea
 
-.env
+# .env
+
+# auto generated wildcard
+app/risk-management/.env

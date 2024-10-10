@@ -44,4 +44,7 @@ service RiskService {
     // unbound actions and functions
     function getItemsByQuantity(quantity : Integer)                         returns array of Items;
     action   createItem(title : String, descr : String, quantity : Integer) returns Items;
+
+    // function to access local destination from cloud connector
+    function getDestinationFromCC() returns String;
 }
