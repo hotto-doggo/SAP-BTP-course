@@ -6,16 +6,21 @@
   "license": "SAP SAMPLE CODE LICENSE",
   "repository": "https://github.com/SAP-samples/sap-learning-extension-suite",
   "dependencies": {
+    "@cap-js/hana": "^1",
     "@sap-cloud-sdk/http-client": "2.15.0",
     "@sap-cloud-sdk/resilience": "3.12.0",
     "@sap/cds": "7.2.0",
     "@sap/cds-dk": "7.6.0",
+    "@sap/cds-mtxs": "^2",
+    "@sap/xssec": "^4",
     "express": "^4",
     "http-status-codes": "^2.3.0",
+    "mta": "^1.0.8",
     "passport": "^0.7.0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8",
     "@sap/ux-specification": "^1.120.17"
   },
   "scripts": {
@@ -31,12 +36,12 @@
         "model": "srv\\external\\API_BUSINESS_PARTNER",
         "credentials": {
           "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
-        },
-        "LOCAL_DESTINATION": {
-          "kind": "odata",
-          "credentials": {
-            "destination": "localDestination"
-          }
+        }
+      },
+      "LOCAL_DESTINATION": {
+        "kind": "odata",
+        "credentials": {
+          "destination": "localDestination"
         }
       },
       "db": {
@@ -57,8 +62,15 @@
           "credentials": {
             "destination": "localDestination"
           }
-        }
+        },
+        "auth": "xsuaa",
+        "multitenancy": true,
+        "db": "hana"
       }
+    },
+    "profile": "with-mtx-sidecar",
+    "sql": {
+      "native_hana_associations": false
     }
   },
   "sapux": [
