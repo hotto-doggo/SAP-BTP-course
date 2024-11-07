@@ -11,7 +11,6 @@
     "@sap-cloud-sdk/resilience": "3.22.2",
     "@sap/cds": "8.4.0",
     "@sap/cds-dk": "8.4.0",
-    "@sap/cds-mtxs": "^2",
     "@sap/xssec": "^4",
     "express": "^4",
     "http-status-codes": "^2.3.0",
@@ -64,11 +63,10 @@
           }
         },
         "auth": "xsuaa",
-        "multitenancy": true,
         "db": "hana"
-      }
+      },
+      "auth": "xsuaa"
     },
-    "profile": "with-mtx-sidecar",
     "sql": {
       "native_hana_associations": false
     }

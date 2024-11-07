@@ -32,13 +32,11 @@ modules:
 
   - name: risk-management
     type: approuter.nodejs
-    path: app/router
+    path: app/
     parameters:
       keep-existing-routes: true
       disk-quota: 256M
       memory: 256M
-    properties:
-      TENANT_HOST_PATTERN: "^(.*)-${default-uri}"
     requires:
       - name: srv-api
         group: destinations
@@ -46,39 +44,8 @@ modules:
           name: srv-api # must be used in xs-app.json as well
           url: ~{srv-url}
           forwardAuthToken: true
-      - name: mtx-api
-        group: destinations
-        properties:
-          name: mtx-api # must be used in xs-app.json as well
-          url: ~{mtx-url}
       - name: risk-management-auth
       - name: risk-management-destination
-    provides:
-      - name: app-api
-        properties:
-          app-protocol: ${protocol}
-          app-uri: ${default-uri}
-
-  - name: risk-management-mtx
-    type: nodejs
-    path: gen/mtx/sidecar
-    requires:
-      - name: app-api
-        properties:
-          SUBSCRIPTION_URL: ~{app-protocol}://\${tenant_subdomain}-~{app-uri}
-      - name: risk-management-destination
-      - name: risk-management-db
-      - name: risk-management-registry
-      - name: risk-management-auth
-    build-parameters:
-      builder: npm-ci
-    parameters:
-      memory: 256M
-      disk-quota: 512M
-    provides:
-      - name: mtx-api
-        properties:
-          mtx-url: ${default-url}
 
   - name: risk-management-db-deployer
     type: hdb
@@ -97,7 +64,7 @@ resources:
       path: ./xs-security.json
       config:
         xsappname: risk-management-${org}-${space}
-        tenant-mode: shared
+        tenant-mode: dedicated
         role-collections:
         - name: 'RiskManager-${org}-${space}'
           description: Manage Risks
@@ -121,23 +88,3 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
-  - name: risk-management-registry
-    type: org.cloudfoundry.managed-service
-    requires:
-      - name: mtx-api
-    parameters:
-      service: saas-registry
-      service-plan: application
-      config:
-        xsappname: risk-management-${org}-${space}
-        appName: risk-management-${org}-${space}
-        displayName: risk-management
-        description: A simple CAP project.
-        category: 'Category'
-        appUrls:
-          getDependencies: ~{mtx-api/mtx-url}/-/cds/saas-provisioning/dependencies
-          onSubscription: ~{mtx-api/mtx-url}/-/cds/saas-provisioning/tenant/{tenantId}
-          onSubscriptionAsync: true
-          onUnSubscriptionAsync: true
-          onUpdateDependenciesAsync: true
-          callbackTimeoutMillis: 300000 # Increase if your deployments are taking longer than that
