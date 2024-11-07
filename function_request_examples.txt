@@ -1,0 +1,36 @@
+@baseUrl = https://port4004-workspaces-ws-l86x8.us10.trial.applicationstudio.cloud.sap/odata/v4/service/risk
+
+GET {{baseUrl}}/$metadata
+
+### ------------------------------------------------------------------------
+GET {{baseUrl}}/getItemsByQuantity(quantity=12)
+
+### ------------------------------------------------------------------------
+POST {{baseUrl}}/createItem
+Content-Type: application/json
+
+{
+  "title": "Some Title 3",
+  "descr": "Some Description 3",
+  "quantity": 10
+}
+
+### ------------------------------------------------------------------------
+POST {{baseUrl}}/createItem
+Content-Type: application/json
+
+{
+  "title": "Some Title 4",
+  "descr": "Some Description 4",
+  "quantity": 150
+}
+
+### ------------------------------------------------------------------------
+POST {{baseUrl}}/Items
+Content-Type: application/json
+
+{
+    "title": "Some Title 5",
+    "descr": "Some Description 5",
+    "quantity": 150
+}
